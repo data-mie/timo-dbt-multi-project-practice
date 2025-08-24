@@ -1,11 +1,11 @@
 with orders as (
-    select * from fct_orders
+    select * from {{ ref('jaffle_shop', 'fct_orders') }}
 ), 
 
 agg as (
     select 
-        ordered_at,
-        sum(order_total) as order_revenue 
+        order_date,
+        sum(amount) as order_revenue 
     from orders 
     group by 1
 )
